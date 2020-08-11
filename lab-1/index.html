@@ -4,31 +4,64 @@
 	<title>Lab - Multimedia Programming 2563 ITKMITL</title>
 	<link rel=stylesheet href="../src/reset.css">
 	<link rel=stylesheet href="lab.css">
+	<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
 <body class="paper">
 	<div id="app">
-		<input type="number">
+		สูตรคูณแม่ <input class="shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" v-model="number">
+		ตัวคูณ <input class="shadow appearance-none border rounded  py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="number" v-model="numx">
 		<div class="space"></div>
-		<h4>{{number}} x 1 = x</h4>
-		<h4>{{number}} x 2 = x</h4>
-		<h4>{{number}} x 3 = x</h4>
-		<h4>{{number}} x 4 = x</h4>
-		<h4>{{number}} x 5 = x</h4>
-		<h4>{{number}} x 6 = x</h4>
-		<h4>{{number}} x 7 = x</h4>
-		<h4>{{number}} x 8 = x</h4>
-		<h4>{{number}} x 9 = x</h4>
-		<h4>{{number}} x 10 = x</h4>
-		<h4>{{number}} x 11 = x</h4>
-		<h4>{{number}} x 12 = x</h4>
+		<hr style="width:70%">
+
+		<!-- <div v-for = "i in x" class="row">
+			{{number}} x <i>{{i}}</i> = <b>{{multiply(i)}}</b>
+		</div> -->
+
+		<table class="table-auto">
+			<thead>
+				<tr>
+					<th> ตัวต้น </th>
+					<th> ตัวคูณ </th>
+					<th> ผลลัพธ์ </th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for = "i in x">
+					<td> {{number}}</td>
+					<td> x {{i}}</td>
+					<td><b> {{multiply(i)}}</b></td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<b><h3>ผลรวมทั้งหมด : <i>{{sum}}</i></h3></b>
 	</div>
 
 	<script>
 		let app = new Vue({
 			el: '#app',
 			data: {
-				number: 2
+				number: 2,
+				numx: 2,
+			},
+			methods: {
+				multiply: function(x){
+
+					return this.number*x
+				}
+			},
+			computed: {
+				x: function(){
+					return parseInt(this.numx)
+				},
+				sum: function() {
+					let sum = 0
+					for (var i = 1; i <= this.x; i++) {
+						sum = sum + (this.multiply(i))
+					}
+					return sum
+				}
 			}
 		})
 	</script>
